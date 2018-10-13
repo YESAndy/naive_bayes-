@@ -7,26 +7,28 @@ from sklearn import cross_validation
 
 class naive_bayes:
 
-    def __init__(self,k,n,a):
-        self.k=k
+    def __init__(self,n,a，c)
+    
+    #define number of train data and the features of x and y for a and c respectively
         self.n=n
+        self.c=c
+        self.a=a
+    #define x and y
         self.x=np.zeros(self.n)
         self.y=np.zeros(self.n)
-        self.c=[0,1]
-        self.a=a
-
-    
+        
+   #read data from input     
     def read():
         pass
     
-    
+    #calculate the probability
     def cal_probab(m,n):
 
         return m/n
         
-    
+    #calculate the occurrence numbers of all possible probability events
     def cal_occur(self,features,x,y):
-        
+        #define a matrix to store the occurrence numbers
         countedlist=np.zeros(len(self.c),len(self.a))
         count=0
         
@@ -42,7 +44,7 @@ class naive_bayes:
             
         return countedlist
     
-                        
+    # train the data                    
     def train(self):
         
         posteriori_event=self.cal_occur(self.a,self.x,self.y)
