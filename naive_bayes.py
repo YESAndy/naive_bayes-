@@ -84,20 +84,12 @@ class naive_bayes:
         
         posteriori_probab,y_probab=self.train()
         
-        #calculate the sum of each y event
-        y_event=np.zeros(len(self.c))
-        for i in range(len(self.a)):
-            y_event[0]+=posteriori_probab[0][i]
-            y_event[1]+=posteriori_probab[1][i]
-            
-        y_probab=np.zeros(len(self.c))
-        sum_y_event=sum(y_event[0],y_event[1])
-        for i in range(len(self.c)):
-            y_probab[i]=self.cal_probab(y_event[i],sum_y_event)
-            
+        test_probab=np.zeros(self.c)
+        test_probab+=1
+        
         #predix
         len_testx=len(self.testx)
-        for i in range(len_testx):
+
        
         
         
