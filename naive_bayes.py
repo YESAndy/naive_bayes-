@@ -48,31 +48,41 @@ class naive_bayes:
     # train the data                    
     def train(self):
         
-        posteriori_event=self.cal_occur(self.trainx,self.trainy)
-        y_event=
-                
-        sum_event=0   
         len_a=len(self.a)
         len_c=len(self.c)
         
-        for i in range(len_a):
-            for j in range(len_c):                
-                if posteriori_event[i][j]!=0:
-                    sum_event+=1
-                    
+        posteriori_event=self.cal_occur(self.trainx,self.trainy)
+        y_event=np.zeros(len_c)        
+        
+        #calculate the number of each y events
+        sum_event=0 
+        for i in range(len_c):
+            for j in range(len_a):                
+                y_event[i]+=posteriori_event[i][j]
+                
+        #calculate the sum of the number of the posteriori events
+        for i in range(len_c):
+            sum_event+=y_event[i]
+         
+        #calculate the probability of each y event 
+        y_probab=np.zeros(len_c)
+        for i in range(len_c):
+            y_probab[i]=self.cal_probab(y_event,sum_event)
+            
+        #calculate the probability of each posteriori event            
         posteriori_probab=np.zeros(len_c,len_a)
         for i in range(len_a):
             for j in range(len_c):
                 posteriori_probab[i][j]=self.cal_probab(posteriori_event[i][j],sum_event)
         
-        return posteriori_probab
+        return posteriori_probab,y_probab
     
     
     def predict(self):
         
         score=0
         
-        posteriori_probab=self.train()
+        posteriori_probab,y_probab=self.train()
         
         #calculate the sum of each y event
         y_event=np.zeros(len(self.c))
@@ -88,7 +98,7 @@ class naive_bayes:
         #predix
         len_testx=len(self.testx)
         for i in range(len_testx):
-            if 
+       
         
         
         
