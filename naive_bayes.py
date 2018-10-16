@@ -20,7 +20,7 @@ class naive_bayes:
     def read(self,filename):
         
         with open(filename,'r')as f:
-            x,y=readlines()
+            x,y=f.readlines()
         
         trainx,trainy,testx,testy=cross_validation(x,y)
         return trainx,trainy,testx,testy
@@ -81,7 +81,7 @@ class naive_bayes:
         return posteriori_probab,y_probab
     
     
-    def predict(self,test):
+    def predict(self,testx):
         
         
         posteriori_probab,y_probab=self.train()
@@ -108,20 +108,20 @@ class naive_bayes:
         return test_predict
         
         
-        def score(self):
+    def score(self):
             
-            score=0
-            
-            len_testx=len(self.testx)
-            
-            for i in range(len_testx):
-                testy_predict=self.predict(self.testx[i])
-                if testy_predict==self.testy[i]:
-                    score+=1
-                    
-            score/=len_testx
-            
-            return score
+        score=0
+        
+        len_testx=len(self.testx)
+        
+        for i in range(len_testx):
+            testy_predict=self.predict(self.testx[i])
+            if testy_predict==self.testy[i]:
+                score+=1
+                
+        score/=len_testx
+        
+        return score
              
                     
                     
