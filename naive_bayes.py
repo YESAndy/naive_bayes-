@@ -17,7 +17,8 @@ class naive_bayes:
         self.trainx,self.trainy,self.testx,self.testy=self.read(x,y)
         
    #read data from input     
-    def read(self,x,y):
+    def read(self,filename):
+        
         
         trainx,trainy,testx,testy=cross_validation=(x,y)
         return trainx,trainy,testx,testy
@@ -80,16 +81,36 @@ class naive_bayes:
     
     def predict(self):
         
-        score=0
         
         posteriori_probab,y_probab=self.train()
         
         test_probab=np.zeros(self.c)
         test_probab+=1
+        test_predict=0
         
         #predix
         len_testx=len(self.testx)
-
+        
+        for i in range(len_testx):
+            for j in range(len(self.a)):
+                if self.testx[i] == self.a[j]:
+                    test_probab[0]=test_probab[0]*posteriori_probab[0][j]*y_probab[0]
+                    test_probab[1]=test_probab[1]*posteriori_probab[1][j]*y_probab[1]
+        
+        #rank the most probable y and select it as predicted class
+        if test_probab[0]>test_probab[1]:
+            test_predict=test_probab[0]
+        else:
+            test_predict=test_probab[1]
+            
+        return test_predict
+        
+        
+        def score(self):
+            
+             pass
+                    
+                    
        
         
         
