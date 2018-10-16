@@ -7,20 +7,22 @@ from sklearn import cross_validation
 
 class naive_bayes:
 
-    def __init__(self,x,y,n,a,c):
+    def __init__(self,filename,n,a,c):
     
     #define number of train data and the features of x and y for a and c respectively
         self.n=n
         self.c=c
         self.a=a
     #define x and y
-        self.trainx,self.trainy,self.testx,self.testy=self.read(x,y)
+        self.trainx,self.trainy,self.testx,self.testy=self.read(filename)
         
    #read data from input     
     def read(self,filename):
         
+        with open(filename,'r')as f:
+            x,y=readlines()
         
-        trainx,trainy,testx,testy=cross_validation=(x,y)
+        trainx,trainy,testx,testy=cross_validation(x,y)
         return trainx,trainy,testx,testy
     
     #calculate the probability
@@ -79,7 +81,7 @@ class naive_bayes:
         return posteriori_probab,y_probab
     
     
-    def predict(self):
+    def predict(self,test):
         
         
         posteriori_probab,y_probab=self.train()
@@ -89,7 +91,7 @@ class naive_bayes:
         test_predict=0
         
         #predix
-        len_testx=len(self.testx)
+        len_testx=len(testx)
         
         for i in range(len_testx):
             for j in range(len(self.a)):
@@ -108,7 +110,19 @@ class naive_bayes:
         
         def score(self):
             
-             pass
+            score=0
+            
+            len_testx=len(self.testx)
+            
+            for i in range(len_testx):
+                testy_predict=self.predict(self.testx[i])
+                if testy_predict==self.testy[i]:
+                    score+=1
+                    
+            score/=len_testx
+            
+            return score
+             
                     
                     
        
